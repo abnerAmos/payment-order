@@ -4,6 +4,7 @@ import br.com.payment.order.dto.OrderDto;
 import br.com.payment.order.dto.StatusDto;
 import br.com.payment.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -30,6 +31,11 @@ public class OrderController {
             OrderDto dto = orderService.getById(id);
 
             return  ResponseEntity.ok(dto);
+        }
+
+        @GetMapping("/port")
+        public String doorReturn(@Value("${local.server.port}") String port) {
+            return String.format("Requisição respondida peela instancia executando na porta %s", port);
         }
 
         @PostMapping()
